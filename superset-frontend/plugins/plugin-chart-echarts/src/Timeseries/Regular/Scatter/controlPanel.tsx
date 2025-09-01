@@ -80,6 +80,16 @@ const config: ControlPanelConfig = {
               ),
             },
           },
+          {
+            name: 'markerXEnabled',
+            config: {
+              type: 'CheckboxControl',
+              label: t('Marker X'),
+              renderTrigger: true,
+              default: markerEnabled,
+              description: t('Replace scatter plot circle with X'),
+            },
+          },
         ],
         [
           {
