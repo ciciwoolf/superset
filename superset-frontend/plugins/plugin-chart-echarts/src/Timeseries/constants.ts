@@ -63,6 +63,7 @@ export const DEFAULT_FORM_DATA: EchartsTimeseriesFormData = {
     sections.FORECAST_DEFAULT_DATA.forecastSeasonalityYearly,
   logAxis: false,
   markerEnabled: false,
+  markerXEnabled: false,
   markerSize: 6,
   minorSplitLine: false,
   opacity: 0.2,

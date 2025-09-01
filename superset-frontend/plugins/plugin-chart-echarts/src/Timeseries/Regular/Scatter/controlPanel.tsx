@@ -46,6 +46,7 @@ import {
 const {
   logAxis,
   markerEnabled,
+  markerXEnabled,
   markerSize,
   minorSplitLine,
   rowLimit,
@@ -86,7 +87,7 @@ const config: ControlPanelConfig = {
               type: 'CheckboxControl',
               label: t('Marker X'),
               renderTrigger: true,
-              default: markerEnabled,
+              default: markerXEnabled,
               description: t('Replace scatter plot circle with X'),
             },
           },
