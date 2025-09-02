@@ -52,6 +52,7 @@ import type { SeriesOption } from 'echarts';
 import {
   EchartsTimeseriesChartProps,
   EchartsTimeseriesFormData,
+  EchartsTimeseriesSeriesType,
   OrientationType,
   TimeseriesChartTransformedProps,
 } from './types';
@@ -93,6 +94,8 @@ import {
   transformSeries,
   transformTimeseriesAnnotation,
 } from './transformers';
+import { xSymbolPath, getXSymbolItemStyle } from './customSymbols';
+
 import {
   OpacityEnum,
   StackControlsValue,
@@ -151,6 +154,7 @@ export default function transformProps(
     legendMargin,
     logAxis,
     markerEnabled,
+    markerXEnabled,
     markerSize,
     metrics,
     minorSplitLine,
@@ -335,6 +339,25 @@ export default function transformProps(
       },
     );
     if (transformedSeries) {
+      if (
+        seriesType === EchartsTimeseriesSeriesType.Scatter &&
+        transformedSeries
+      ) {
+        (transformedSeries as any).symbol = markerXEnabled
+          ? xSymbolPath
+          : 'circle';
+        (transformedSeries as any).symbolSize = markerSize;
+        const color = colorScale(colorScaleKey);
+        (transformedSeries as any).itemStyle = markerXEnabled
+          ? getXSymbolItemStyle(color)
+          : { ...((transformedSeries as any).itemStyle || {}), color };
+        console.log(
+          'Scatter symbol:',
+          (transformedSeries as any).symbol,
+          'markerXEnabled:',
+          markerXEnabled,
+        );
+      }
       if (stack === StackControlsValue.Stream) {
         // bug in Echarts - `stackStrategy: 'all'` doesn't work with nulls, so we cast them to 0
         series.push({
