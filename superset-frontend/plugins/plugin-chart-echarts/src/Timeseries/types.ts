@@ -51,6 +51,18 @@ export enum EchartsTimeseriesSeriesType {
   End = 'end',
 }
 
+export enum DefaultMarkerSymbolEnum {
+  Circle = 'circle',
+  Diamond = 'diamond',
+  Rect = 'rect',
+  RoundRect = 'roundRect',
+  Triangle = 'triangle',
+}
+
+export type CustomSymbolPath = `path://${string}`;
+
+export type MarkerSymbolType = DefaultMarkerSymbolEnum | CustomSymbolPath;
+
 export type EchartsTimeseriesFormData = QueryFormData & {
   annotationLayers: AnnotationLayer[];
   area: boolean;
@@ -65,7 +77,7 @@ export type EchartsTimeseriesFormData = QueryFormData & {
   forecastSeasonalityYearly: null;
   logAxis: boolean;
   markerEnabled: boolean;
-  markerXEnabled: boolean;
+  markerSymbol: MarkerSymbolType;
   markerSize: number;
   metrics: QueryFormMetric[];
   minorSplitLine: boolean;

@@ -94,7 +94,6 @@ import {
   transformSeries,
   transformTimeseriesAnnotation,
 } from './transformers';
-import { xSymbolPath, getXSymbolItemStyle } from './customSymbols';
 
 import {
   OpacityEnum,
@@ -109,6 +108,7 @@ import {
   getXAxisFormatter,
   getYAxisFormatter,
 } from '../utils/formatters';
+import { getMarkerItemStyle } from './markerSymbolOptions';
 
 export default function transformProps(
   chartProps: EchartsTimeseriesChartProps,
@@ -154,7 +154,6 @@ export default function transformProps(
     legendMargin,
     logAxis,
     markerEnabled,
-    markerXEnabled,
     markerSize,
     metrics,
     minorSplitLine,
@@ -343,19 +342,13 @@ export default function transformProps(
         seriesType === EchartsTimeseriesSeriesType.Scatter &&
         transformedSeries
       ) {
-        (transformedSeries as any).symbol = markerXEnabled
-          ? xSymbolPath
-          : 'circle';
+        (transformedSeries as any).symbol = formData.markerSymbol;
         (transformedSeries as any).symbolSize = markerSize;
+        // For custom symbol path styles
         const color = colorScale(colorScaleKey);
-        (transformedSeries as any).itemStyle = markerXEnabled
-          ? getXSymbolItemStyle(color)
-          : { ...((transformedSeries as any).itemStyle || {}), color };
-        console.log(
-          'Scatter symbol:',
-          (transformedSeries as any).symbol,
-          'markerXEnabled:',
-          markerXEnabled,
+        (transformedSeries as any).itemStyle = getMarkerItemStyle(
+          formData.markerSymbol,
+          color,
         );
       }
       if (stack === StackControlsValue.Stream) {

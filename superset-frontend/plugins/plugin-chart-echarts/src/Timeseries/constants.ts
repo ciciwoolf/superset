@@ -26,6 +26,7 @@ import {
   OrientationType,
   EchartsTimeseriesSeriesType,
   EchartsTimeseriesFormData,
+  DefaultMarkerSymbolEnum,
 } from './types';
 // import {
 //   DEFAULT_LEGEND_FORM_DATA,
@@ -63,7 +64,7 @@ export const DEFAULT_FORM_DATA: EchartsTimeseriesFormData = {
     sections.FORECAST_DEFAULT_DATA.forecastSeasonalityYearly,
   logAxis: false,
   markerEnabled: false,
-  markerXEnabled: false,
+  markerSymbol: DefaultMarkerSymbolEnum.Circle,
   markerSize: 6,
   minorSplitLine: false,
   opacity: 0.2,

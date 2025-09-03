@@ -42,11 +42,12 @@ import {
   xAxisLabelRotation,
   xAxisLabelInterval,
 } from '../../../controls';
+import { markerSymbolOptions } from '../../markerSymbolOptions';
 
 const {
   logAxis,
   markerEnabled,
-  markerXEnabled,
+  markerSymbol,
   markerSize,
   minorSplitLine,
   rowLimit,
@@ -70,6 +71,21 @@ const config: ControlPanelConfig = {
         ...showValueSection,
         [
           {
+            name: 'markerSymbol',
+            config: {
+              type: 'SelectControl',
+              label: t('Marker Symbol'),
+              renderTrigger: true,
+              default: markerSymbol,
+              choices: markerSymbolOptions,
+              description: t(
+                'Select the marker symbol for scatter plot points.',
+              ),
+            },
+          },
+        ],
+        [
+          {
             name: 'markerEnabled',
             config: {
               type: 'CheckboxControl',
@@ -79,16 +95,6 @@ const config: ControlPanelConfig = {
               description: t(
                 'Draw a marker on data points. Only applicable for line types.',
               ),
-            },
-          },
-          {
-            name: 'markerXEnabled',
-            config: {
-              type: 'CheckboxControl',
-              label: t('Marker X'),
-              renderTrigger: true,
-              default: markerXEnabled,
-              description: t('Replace scatter plot circle with X'),
             },
           },
         ],
