@@ -26,6 +26,8 @@ import {
 
 // Example of how to set a custom SVG path for a shape
 export const xSymbolPath: CustomSymbolPath = 'path://M-8,-8L8,8M8,-8L-8,8';
+export const minimalCat: CustomSymbolPath =
+  'path://M-15,10C-15,-8,-8,-15,0,-15C8,-15,15,-8,15,10C15,18,8,25,0,25C-8,25,-15,18,-15,10ZM-12,-12L-20,-25L-8,-18ZM12,-12L20,-25L8,-18Z';
 
 export const MARKER_SHAPES = Object.freeze({
   [DefaultMarkerSymbolEnum.Circle]: {
@@ -49,6 +51,7 @@ export const MARKER_SHAPES = Object.freeze({
     value: DefaultMarkerSymbolEnum.Triangle,
   },
   xSymbol: { label: 'X', value: xSymbolPath },
+  catSymbol: { label: 'Cat', value: minimalCat },
 });
 
 export const markerSymbolOptions = Object.values(MARKER_SHAPES).map(
