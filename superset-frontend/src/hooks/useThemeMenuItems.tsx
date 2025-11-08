@@ -17,9 +17,10 @@
  * under the License.
  */
 import { useMemo } from 'react';
-import { Icons } from '@superset-ui/core/components';
+import { Icons, Tooltip } from '@superset-ui/core/components';
 import type { MenuItem } from '@superset-ui/core/components/Menu';
-import { t, ThemeMode, useTheme, ThemeAlgorithm } from '@superset-ui/core';
+import { t } from '@superset-ui/core';
+import { ThemeMode, ThemeAlgorithm } from '@apache-superset/core/ui';
 
 export interface ThemeSubMenuOption {
   key: ThemeMode;
@@ -43,8 +44,6 @@ export const useThemeMenuItems = ({
   onClearLocalSettings,
   allowOSPreference = true,
 }: ThemeSubMenuProps): MenuItem => {
-  const theme = useTheme();
-
   const handleSelect = (mode: ThemeMode) => {
     setThemeMode(mode);
   };
@@ -63,11 +62,13 @@ export const useThemeMenuItems = ({
   const selectedThemeModeIcon = useMemo(
     () =>
       hasLocalOverride ? (
-        <Icons.FormatPainterOutlined style={{ color: theme.colorError }} />
+        <Tooltip title={t('This theme is set locally')} placement="bottom">
+          <Icons.ThunderboltOutlined />
+        </Tooltip>
       ) : (
         themeIconMap[themeMode]
       ),
-    [hasLocalOverride, theme.colorError, themeIconMap, themeMode],
+    [hasLocalOverride, themeIconMap, themeMode],
   );
 
   const themeOptions: MenuItem[] = [
@@ -104,22 +105,14 @@ export const useThemeMenuItems = ({
       : []),
   ];
 
-  const children: MenuItem[] = [
-    {
-      type: 'group' as const,
-      label: t('Theme'),
-      key: 'theme-group',
-      children: themeOptions,
-    },
-  ];
-
-  // Add clear settings option only when there's a local theme active
+  // Add clear settings option to theme options if there's a local theme active
+  const themeGroupOptions = [...themeOptions];
   if (onClearLocalSettings && hasLocalOverride) {
-    children.push({
+    themeGroupOptions.push({
       type: 'divider' as const,
       key: 'theme-divider',
     });
-    children.push({
+    themeGroupOptions.push({
       key: 'clear-local',
       label: (
         <>
@@ -130,10 +123,19 @@ export const useThemeMenuItems = ({
     });
   }
 
+  const children: MenuItem[] = [
+    {
+      type: 'group' as const,
+      label: t('Theme'),
+      key: 'theme-group',
+      children: themeGroupOptions,
+    },
+  ];
+
   return {
     key: 'theme-sub-menu',
     label: selectedThemeModeIcon,
-    icon: <Icons.CaretDownOutlined iconSize="xs" />,
+    icon: <Icons.DownOutlined iconSize="xs" />,
     className: 'submenu-with-caret',
     children,
   };

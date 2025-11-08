@@ -41,6 +41,7 @@ import {
   xAxisBounds,
   xAxisLabelRotation,
   xAxisLabelInterval,
+  forceMaxInterval,
 } from '../../../controls';
 import { markerSymbolOptions } from '../../markerSymbolOptions';
 
@@ -133,6 +134,7 @@ const config: ControlPanelConfig = {
         ],
         [xAxisLabelRotation],
         [xAxisLabelInterval],
+        [forceMaxInterval],
         // eslint-disable-next-line react/jsx-key
         ...richTooltipSection,
         // eslint-disable-next-line react/jsx-key

@@ -20,8 +20,8 @@ import {
   ChartProps,
   getNumberFormatter,
   SqlaFormData,
-  supersetTheme,
 } from '@superset-ui/core';
+import { supersetTheme } from '@apache-superset/core/ui';
 import type { PieSeriesOption } from 'echarts/charts';
 import type {
   LabelFormatterCallback,
@@ -446,7 +446,7 @@ describe('Other category', () => {
   });
 });
 
-describe('Sort Legend', () => {
+describe('legend sorting', () => {
   const defaultFormData: SqlaFormData = {
     colorScheme: 'bnbColors',
     datasource: '3__table',
