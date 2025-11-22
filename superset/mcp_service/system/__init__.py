@@ -15,21 +15,4 @@
 # specific language governing permissions and limitations
 # under the License.
 
-from typing import Type
-
-from superset_core.api.types.rest_api import CoreRestApi, RestApi
-
-from superset.extensions import appbuilder
-
-
-class HostRestApi(CoreRestApi):
-    @staticmethod
-    def add_api(api: Type[RestApi]) -> None:
-        view = appbuilder.add_api(api)
-        appbuilder._add_permission(view, True)
-
-    @staticmethod
-    def add_extension_api(api: Type[RestApi]) -> None:
-        api.route_base = "/extensions/" + (api.resource_name or "")
-        view = appbuilder.add_api(api)
-        appbuilder._add_permission(view, True)
+"""System-level MCP service tools and utilities."""
