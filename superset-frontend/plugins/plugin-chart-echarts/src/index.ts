@@ -31,6 +31,7 @@ export { default as EchartsGaugeChartPlugin } from './Gauge';
 export { default as EchartsHistogramChartPlugin } from './Histogram';
 export { default as EchartsRadarChartPlugin } from './Radar';
 export { default as EchartsFunnelChartPlugin } from './Funnel';
+export { default as EchartsPolarPunchCardChartPlugin } from './PolarPunchCard';
 export { default as EchartsTreeChartPlugin } from './Tree';
 export { default as EchartsHeatmapChartPlugin } from './Heatmap';
 export { default as EchartsTreemapChartPlugin } from './Treemap';
@@ -62,6 +63,7 @@ export { default as WaterfallTransformProps } from './Waterfall/transformProps';
 export { default as HistogramTransformProps } from './Histogram/transformProps';
 export { default as SankeyTransformProps } from './Sankey/transformProps';
 export { default as GanttTransformProps } from './Gantt/transformProps';
+export { default as PolarPunchCardTransformProps } from './PolarPunchCard/transformProps';
 
 export { DEFAULT_FORM_DATA as TimeseriesDefaultFormData } from './Timeseries/constants';
 

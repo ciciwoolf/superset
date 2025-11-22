@@ -59,6 +59,7 @@ import {
   EchartsHistogramChartPlugin,
   EchartsRadarChartPlugin,
   EchartsFunnelChartPlugin,
+  EchartsPolarPunchCardChartPlugin,
   EchartsSankeyChartPlugin,
   EchartsTreemapChartPlugin,
   EchartsMixedTimeseriesChartPlugin,
@@ -133,6 +134,9 @@ export default class MainPreset extends Preset {
         new PartitionChartPlugin().configure({ key: VizType.Partition }),
         new EchartsPieChartPlugin().configure({ key: VizType.Pie }),
         new PivotTableChartPluginV2().configure({ key: VizType.PivotTable }),
+        new EchartsPolarPunchCardChartPlugin().configure({
+          key: VizType.PolarPunchCard,
+        }),
         new RoseChartPlugin().configure({ key: VizType.Rose }),
         new TableChartPlugin().configure({ key: VizType.Table }),
         new TimePivotChartPlugin().configure({ key: VizType.TimePivot }),
