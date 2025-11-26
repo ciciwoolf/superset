@@ -89,17 +89,6 @@ export default function transformProps(
     number,
   ];
 
-  // Debug: Log column labels and first few rows
-  console.log('=== POLAR PUNCH CARD DEBUG ===');
-  console.log('Angle column label:', angleLabel);
-  console.log('Radius column label:', radiusLabel);
-  console.log('Size metric label:', sizeLabel);
-  console.log('First 5 raw data rows:', data.slice(0, 5));
-  console.log(
-    'All keys in first row:',
-    data.length > 0 ? Object.keys(data[0]) : 'No data',
-  );
-
   // Transform data to ECharts polar scatter format
   const scatterData = data.map((row, index) => {
     const angleValueRaw = row[angleLabel] as number;
@@ -124,13 +113,6 @@ export default function transformProps(
 
     // Get color from color dimension if available, otherwise use default
     const pointColor = colorValue ? colorFn(String(colorValue)) : colorFn(0);
-
-    // Debug: log first 20 conversions to see what's happening
-    if (index < 20) {
-      console.log(
-        `Row ${index}: angleValueRaw=${angleValueRaw} → angleValue=${angleValue}, radiusValueRaw=${radiusValueRaw} → radiusValueName=${radiusValueName} (index: ${radiusValueIndex}), colorValue=${colorValue}, sizeValue=${sizeValue}`,
-      );
-    }
 
     // Normalize size to bubble size range with scaling factor
     const normalizedSize =
@@ -169,24 +151,19 @@ export default function transformProps(
   // Combine real data with placeholder data
   const allScatterData = [...scatterData, ...placeholderData];
 
-  console.log('Radius axis values (hardcoded):', radiusValues);
-  console.log('Radius axis config: type=value, min=0, max=6, interval=1');
-  console.log('Day indices: 0=Sunday, 1=Monday, 2=Tuesday, 3=Wednesday, 4=Thursday, 5=Friday, 6=Saturday');
-  console.log('First 5 scatter data points:', scatterData.slice(0, 5));
-  console.log('Total scatter data points:', scatterData.length);
-  console.log('Added placeholder data for all days:', placeholderData.length);
-  console.log('Sample data point breakdown:');
-  if (scatterData.length > 0) {
-    const sample = scatterData[0];
-    console.log(`  value[0] (angle/time): ${sample.value[0]}`);
-    console.log(`  value[1] (radius/day index): ${sample.value[1]}`);
-    console.log(`  value[2] (size/count): ${sample.value[2]}`);
-    console.log(`  Day name should be: ${radiusValues[sample.value[1] as number]}`);
-  }
-
-  // Check unique day indices in the data
-  const uniqueDayIndices = new Set(scatterData.map(d => d.value[1]));
-  console.log('Unique day indices in data:', Array.from(uniqueDayIndices).sort());
+  // Log summary for debugging
+  console.log('Polar Punch Card Data Summary:', {
+    totalDataPoints: scatterData.length,
+    sizeRange: `${sizeExtent[0]} - ${sizeExtent[1]}`,
+    bubbleSizeConfig: `${minBubbleSize} - ${maxBubbleSize} (scaled by 2.0x)`,
+    colorDimension: colorLabel || 'None',
+    sampleData: scatterData.slice(0, 3).map(d => ({
+      day: radiusValues[d.value[0] as number],
+      time: `${Math.floor(d.value[1] as number)}:${String(Math.round(((d.value[1] as number) % 1) * 60)).padStart(2, '0')}`,
+      count: d.value[2],
+      bubbleSize: d.symbolSize,
+    })),
+  });
 
   const echartOptions: EChartsCoreOption = {
     grid: {

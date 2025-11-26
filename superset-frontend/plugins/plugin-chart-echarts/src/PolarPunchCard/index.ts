@@ -48,7 +48,7 @@ export default class EchartsPolarPunchCardChartPlugin extends EchartsChartPlugin
         category: t('Evolution'),
         credits: ['https://echarts.apache.org'],
         description: t(
-          'Visualize data in a polar coordinate system with scatter points, ideal for showing patterns across two categorical dimensions (like hours and days of week). Bubble size represents the magnitude of your metric.',
+          'Visualize data in a polar coordinate system with scatter points, ideal for showing patterns across two categorical dimensions (like hours and days of week). Bubble size represents the magnitude of your metric. Color dimension optional for visualizing sets of data on the same chart',
         ),
         exampleGallery: [{ url: example1, urlDark: example1Dark }],
         name: t('Polar Punch Card'),
