@@ -132,7 +132,7 @@ export default function transformProps(
       );
     }
 
-    // Normalize size to bubble size range
+    // Normalize size to bubble size range with scaling factor
     const normalizedSize =
       sizeExtent[1] - sizeExtent[0] > 0
         ? minBubbleSize +
@@ -140,11 +140,14 @@ export default function transformProps(
             (maxBubbleSize - minBubbleSize)
         : minBubbleSize;
 
+    // Apply 2.0 scaling factor to make bubbles more visible
+    const scaledSize = normalizedSize * 2.0;
+
     // ECharts polar scatter format: [radius, angle, value]
     // We want: radius = day (0-6), angle = time (0-24)
     return {
       value: [radiusValueIndex, angleValue, sizeValue],
-      symbolSize: normalizedSize,
+      symbolSize: scaledSize,
       itemStyle: {
         color: pointColor,
       },

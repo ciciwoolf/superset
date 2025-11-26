@@ -59,16 +59,6 @@ const config: ControlPanelConfig = {
         ],
         [
           {
-            name: 'sizeMetric',
-            config: {
-              ...sharedControls.metric,
-              label: t('Size Metric'),
-              description: t('Metric that controls the size of the bubbles'),
-            },
-          },
-        ],
-        [
-          {
             name: 'colorDimension',
             config: {
               ...sharedControls.groupby,
@@ -77,6 +67,16 @@ const config: ControlPanelConfig = {
                 'Optional: Column to color bubbles by category (e.g., incident type, severity)',
               ),
               multi: false,
+            },
+          },
+        ],
+        [
+          {
+            name: 'sizeMetric',
+            config: {
+              ...sharedControls.metric,
+              label: t('Size Metric'),
+              description: t('Metric that controls the size of the bubbles'),
             },
           },
         ],
@@ -122,14 +122,7 @@ const config: ControlPanelConfig = {
               freeForm: true,
               label: t('Max Bubble Size'),
               default: String(DEFAULT_FORM_DATA.maxBubbleSize),
-              choices: formatSelectOptions([
-                '25',
-                '50',
-                '75',
-                '100',
-                '150',
-                '200',
-              ]),
+              choices: formatSelectOptions(['10', '15', '20']),
               description: t('Maximum size of bubbles'),
             },
           },

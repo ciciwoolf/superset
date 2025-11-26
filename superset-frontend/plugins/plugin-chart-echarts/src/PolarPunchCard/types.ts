@@ -52,8 +52,8 @@ export type EchartsPolarPunchCardFormData = QueryFormData &
 export const DEFAULT_FORM_DATA: Partial<EchartsPolarPunchCardFormData> = {
   ...DEFAULT_LEGEND_FORM_DATA,
   rowLimit: 10,
-  minBubbleSize: 3,
-  maxBubbleSize: 20,
+  minBubbleSize: 2,
+  maxBubbleSize: 10,
 };
 
 export interface EchartsPolarPunchCardChartProps
